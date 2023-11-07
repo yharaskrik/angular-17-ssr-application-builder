@@ -24,6 +24,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-17-ssr-application-builder app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain(
+      'angular-17-ssr-application-builder app is running!',
+    );
   });
 });
