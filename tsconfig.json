@@ -6,7 +6,6 @@
     "noUnusedLocals": true,
     "downlevelIteration": true,
     "sourceMap": true,
-    "allowJs": true,
     "declaration": false,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

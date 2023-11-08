@@ -1,4 +1,10 @@
-import { type ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  type ApplicationConfig,
+  ENVIRONMENT_INITIALIZER,
+  importProvidersFrom,
+  inject,
+  Injector,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -12,8 +18,11 @@ import {
   provideAuth,
 } from '@angular/fire/auth';
 import {
+  fetchAndActivate,
   getRemoteConfig,
+  isSupported,
   provideRemoteConfig,
+  RemoteConfig,
 } from '@angular/fire/remote-config';
 import { getPerformance, providePerformance } from '@angular/fire/performance';
 
@@ -43,5 +52,15 @@ export const appConfig: ApplicationConfig = {
         },
       })),
     ]),
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      multi: true,
+      useValue() {
+        const injector = inject(Injector);
+        return isSupported().then(() =>
+          fetchAndActivate(injector.get(RemoteConfig)),
+        );
+      },
+    },
   ],
 };
